@@ -6,109 +6,109 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BooksData(
-    @SerializedName("kind"       ) val kind       : String?          = null,
-    @SerializedName("totalItems" ) val totalItems : Int?             = null,
+    @SerializedName("kind") val kind: String? = null,
+    @SerializedName("totalItems") val totalItems : Int? = null,
     @SerializedName("items") val items: ArrayList<Book> = arrayListOf()
     )
 
 @Serializable
 data class Book(
-    val kind: String,
-    val id : String,
-    @SerialName("etaq") val eTag : String? = null,
-    val selfLink : String,
-    val volumeInfo : VolumeInfo,
-    val saleInfo : SaleInfo,
-    val accessInfo : AccessInfo,
-    val searchInfo : SearchInfo
+    @SerializedName("kind") val kind: String? = null,
+    @SerializedName("id") val id : String? = null,
+    @SerializedName("etaq") val etag : String? = null,
+    @SerializedName("selfLink") val selfLink : String? = null,
+    @SerializedName("volumeInfo ") var volumeInfo : VolumeInfo? = VolumeInfo(),
+    @SerializedName("saleInfo") val saleInfo : SaleInfo = SaleInfo(),
+    @SerializedName("accessInfo") val accessInfo : AccessInfo = AccessInfo(),
+    @SerializedName("searchInfo") val searchInfo : SearchInfo = SearchInfo()
 )
 
 @Serializable
 data class VolumeInfo(
-    val title: String,
-    val authors: List<String> = emptyList(),
-    val publisher: String? = null,
-    val publishedDate: String? = null,
-    val description: String? = null,
-    val industryIdentifiers: List<IndustryIdentifier> = emptyList(),
-    val readingModes: ReadingModes? = null,
-    val pageCount: Int? = null,
-    val printedPageCount: Int? = null,
-    val printType: String? = null,
-    val categories: List<String> = emptyList(),
-    val maturityRating: String? = null,
-    val allowAnonLogging: Boolean? = null,
-    val contentVersion: String? = null,
-    val panelizationSummary: PanelizationSummary? = null,
-    val imageLinks: ImageLinks? = null,
-    val language: String? = null,
-    val previewLink: String? = null,
-    val infoLink: String? = null,
-    val canonicalVolumeLink: String? = null
+    @SerializedName("title") val title: String? = null,
+    @SerializedName("authors") val authors: ArrayList<String> = arrayListOf(),
+    @SerializedName("publisher") val publisher: String? = null,
+    @SerializedName("publishedDate") val publishedDate: String? = null,
+    @SerializedName("description") val description: String? = null,
+    @SerializedName("industryIdentifiers") val industryIdentifiers: ArrayList<IndustryIdentifier> = arrayListOf(),
+    @SerializedName("readingModes") val readingModes: ReadingModes? = ReadingModes(),
+    @SerializedName("pageCount") val pageCount: Int? = null,
+    @SerializedName("printedPageCount") val printedPageCount: Int? = null,
+    @SerializedName("printType") val printType: String? = null,
+    @SerializedName("categories") val categories: ArrayList<String> = arrayListOf(),
+    @SerializedName("maturityRating") val maturityRating: String? = null,
+    @SerializedName("allowAnonLogging") val allowAnonLogging: Boolean? = null,
+    @SerializedName("contentVersion") val contentVersion: String? = null,
+    @SerializedName("panelizationSummary") val panelizationSummary: PanelizationSummary? = PanelizationSummary(),
+    @SerializedName("imageLinks") val imageLinks: ImageLinks? = ImageLinks(),
+    @SerializedName("language") val language: String? = null,
+    @SerializedName("previewLink") val previewLink: String? = null,
+    @SerializedName("infoLink") val infoLink: String? = null,
+    @SerializedName("canonicalVolumeLink") val canonicalVolumeLink: String? = null
 )
 
 @Serializable
 data class IndustryIdentifier(
-    val type: String,
-    val identifier: String
+    @SerializedName("type") val type: String? = null,
+    @SerializedName("identifier") val identifier: String? = null
 )
 
 @Serializable
 data class ReadingModes(
-    val text: Boolean,
-    val image: Boolean
+    @SerializedName("text") val text: Boolean? = null,
+    @SerializedName("image") val image: Boolean? = null
 )
 
 @Serializable
 data class PanelizationSummary(
-    val containsEpubBubbles: Boolean,
-    val containsImageBubbles: Boolean
+    @SerializedName("containsEpubBubbles") val containsEpubBubbles: Boolean? = null,
+    @SerializedName("containsImageBubbles") val containsImageBubbles: Boolean? = null
 )
 
 @Serializable
 data class ImageLinks(
-    val smallThumbnail: String? = null,
-    val thumbnail: String? = null,
-    val small: String? = null,
-    val medium: String? = null
+    @SerializedName("smallThumbnail") val smallThumbnail: String? = null,
+    @SerializedName("thumbnail") val thumbnail: String? = null,
+    @SerializedName("small") val small: String? = null,
+    @SerializedName("medium") val medium: String? = null
 )
 
 @Serializable
 data class SaleInfo(
-    val country : String? = null,
-    val saleability : String? = null,
-    val isEbook : Boolean
+    @SerializedName("country") val country : String? = null,
+    @SerializedName("saleability") val saleability : String? = null,
+    @SerializedName("isEbook") val isEbook : Boolean? = null
 )
 
 @Serializable
 data class AccessInfo(
-    val country : String,
-    val viewability : String,
-    val embeddable : Boolean,
-    val publicDomain : Boolean,
-    val textToSpeechPermission : String,
-    val epub : Epub,
-    val pdf : Pdf,
-    val webReaderLink : String? = null,
-    val accessViewStatus : String? = null,
-    val quoteSharingAllowed : Boolean
+    @SerializedName("country") val country : String? = null,
+    @SerializedName("viewability") val viewability : String? = null,
+    @SerializedName("embeddable") val embeddable : Boolean? = null,
+    @SerializedName("publicDomain") val publicDomain : Boolean? = null,
+    @SerializedName("textToSpeechPermission") val textToSpeechPermission : String? = null,
+    @SerializedName("epub") val epub : Epub = Epub(),
+    @SerializedName("pdf") val pdf : Pdf = Pdf(),
+    @SerializedName("ebReaderLink") val webReaderLink : String? = null,
+    @SerializedName("accessViewStatus") val accessViewStatus : String? = null,
+    @SerializedName("quoteSharingAllowed") val quoteSharingAllowed : Boolean? = null
 )
 
 @Serializable
 data class Epub(
-    val isAvailable : Boolean,
-    val acsTokenLink : String? = null
+    @SerializedName("isAvailable") val isAvailable : Boolean? = null,
+    @SerializedName("acsTokenLink") val acsTokenLink : String? = null
 )
 
 @Serializable
 data class Pdf(
-    val isAvailable : Boolean,
-    val acsTokenLink : String? = null
+    @SerializedName("isAvailable") val isAvailable : Boolean? = null,
+    @SerializedName("acsTokenLink") val acsTokenLink : String? = null
 )
 
 @Serializable
 data class SearchInfo(
-    val textSnippet : String? = null
+    @SerializedName("textSnippet") val textSnippet : String? = null
 )
 
 
