@@ -27,11 +27,13 @@ fun BooksApp(){
         topBar = { BooksTopAppBar(scrollBehavior = scrollBehavior)}
     ) {
         Surface(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
         ) {
             val booksViewModel: BooksViewModel = viewModel(factory = BooksViewModel.Factory)
             HomeScreen(
                 booksUiState = booksViewModel.booksUiState,
+                retryAction = booksViewModel::getBooks,
                 contentPadding = it
             )
         }

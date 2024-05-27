@@ -8,19 +8,18 @@ import kotlinx.serialization.Serializable
 data class BooksData(
     @SerializedName("kind") val kind: String? = null,
     @SerializedName("totalItems") val totalItems : Int? = null,
-    @SerializedName("items") val items: ArrayList<Book> = arrayListOf()
+    @SerializedName("items") val items: ArrayList<Item> = arrayListOf()
     )
 
 @Serializable
-data class Book(
+data class Item(
     @SerializedName("kind") val kind: String? = null,
     @SerializedName("id") val id : String? = null,
-    @SerializedName("etaq") val etag : String? = null,
+    @SerializedName("etag") val etag : String? = null,
     @SerializedName("selfLink") val selfLink : String? = null,
-    @SerializedName("volumeInfo ") var volumeInfo : VolumeInfo? = VolumeInfo(),
+    @SerializedName("volumeInfo") var volumeInfo : VolumeInfo? = VolumeInfo(),
     @SerializedName("saleInfo") val saleInfo : SaleInfo = SaleInfo(),
     @SerializedName("accessInfo") val accessInfo : AccessInfo = AccessInfo(),
-    @SerializedName("searchInfo") val searchInfo : SearchInfo = SearchInfo()
 )
 
 @Serializable

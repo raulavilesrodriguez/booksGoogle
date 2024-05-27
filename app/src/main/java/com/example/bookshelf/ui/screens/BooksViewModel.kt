@@ -10,12 +10,13 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.bookshelf.BooksApplication
 import com.example.bookshelf.data.BooksRepository
+import com.example.bookshelf.model.Book
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
 sealed interface BooksUiState {
-    data class Success(val books: String) : BooksUiState
+    data class Success(val books: ArrayList<Book>) : BooksUiState
     object Error : BooksUiState
     object  Loading : BooksUiState
 }
@@ -24,6 +25,8 @@ class BooksViewModel(private val booksRepository : BooksRepository) : ViewModel(
 
     var booksUiState : BooksUiState by mutableStateOf(BooksUiState.Loading)
         private set
+
+    private val booksList : ArrayList<Book> = arrayListOf()
 
     init {
         getBooks()
@@ -34,7 +37,13 @@ class BooksViewModel(private val booksRepository : BooksRepository) : ViewModel(
             booksUiState = BooksUiState.Loading
             booksUiState = try {
                 val books = booksRepository.getBooks()
-                BooksUiState.Success("Exito ${books.kind} items recuperados")
+                books.items.map{item ->
+                    item.id?.let {
+                        val book = booksRepository.getBook(it)
+                        booksList.add(book)
+                    }
+                }
+                BooksUiState.Success(booksList)
             } catch (e: IOException){
                 BooksUiState.Error
             } catch (e: HttpException) {
