@@ -17,7 +17,7 @@ class DefaultBooksRepository(
     private val booksApiService: BooksApiService
 ) : BooksRepository {
 
-    override suspend fun getBooks(): BooksData = booksApiService.getBooks("jazz+history")
+    override suspend fun getBooks(): BooksData = booksApiService.getBooks("jazz+history", 40)
     override  suspend fun getBook(id: String): Book {
         val item = booksApiService.getItem(id)
         return Book(
