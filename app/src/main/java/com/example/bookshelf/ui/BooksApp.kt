@@ -15,12 +15,15 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bookshelf.R
+import com.example.bookshelf.model.Book
 import com.example.bookshelf.ui.screens.BooksViewModel
 import com.example.bookshelf.ui.screens.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BooksApp(){
+fun BooksApp(
+    onBookClicked: (Book) -> Unit
+){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -34,6 +37,7 @@ fun BooksApp(){
             HomeScreen(
                 booksUiState = booksViewModel.booksUiState,
                 retryAction = booksViewModel::getBooks,
+                onBookClicked,
                 contentPadding = it
             )
         }

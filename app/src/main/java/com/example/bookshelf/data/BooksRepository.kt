@@ -23,7 +23,8 @@ class DefaultBooksRepository(
         return Book(
             id = item.id,
             imageLink = item.volumeInfo?.imageLinks?.thumbnail,
-            title = item.volumeInfo?.title
+            title = item.volumeInfo?.title,
+            previewLink = item.volumeInfo?.previewLink
         )
     }
 

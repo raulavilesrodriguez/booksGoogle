@@ -1,12 +1,11 @@
 package com.example.bookshelf.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -41,6 +40,7 @@ import com.example.bookshelf.ui.theme.BookshelfTheme
 fun HomeScreen(
     booksUiState : BooksUiState,
     retryAction:() -> Unit,
+    onBookClicked: (Book) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ){
@@ -49,6 +49,7 @@ fun HomeScreen(
         is BooksUiState.Success ->
             ResultScreen(
                 books = booksUiState.books,
+                onBookClicked = onBookClicked,
                 modifier = modifier,
                 contentPadding = contentPadding
             )
@@ -83,12 +84,13 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BookCard(book: Book, modifier: Modifier = Modifier){
+fun BookCard(book: Book, onBookClicked: (Book) -> Unit, modifier: Modifier = Modifier){
     Card(
         modifier = modifier
             .padding(4.dp)
             .fillMaxWidth()
-            .requiredHeight(296.dp),
+            .requiredHeight(296.dp)
+            .clickable { onBookClicked(book) },
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         AsyncImage(
@@ -108,6 +110,7 @@ fun BookCard(book: Book, modifier: Modifier = Modifier){
 @Composable
 fun ResultScreen(
     books: ArrayList<Book>,
+    onBookClicked: (Book) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(4.dp),
 ){
@@ -116,7 +119,7 @@ fun ResultScreen(
         contentPadding = contentPadding,
     ) {
         itemsIndexed(books) {_, book ->
-            BookCard(book, modifier)
+            BookCard(book, onBookClicked, modifier)
         }
     }
 }
@@ -174,13 +177,13 @@ fun ErrorScreenPreview() {
 fun ResultScreenPreview(){
     BookshelfTheme {
         val fakeData = arrayListOf(
-            Book("1", "", "book1"),
-            Book("2", "", "book2"),
-            Book("3", "", "book3"),
-            Book("4", "", "book4"),
-            Book("5", "", "book5"),
-            Book("6", "", "book5"),
+            Book("1", "", "book1", "www.b1.com"),
+            Book("2", "", "book2", "www.b2.com"),
+            Book("3", "", "book3", "www.b3.com"),
+            Book("4", "", "book4", "www.b4.com"),
+            Book("5", "", "book5", "www.b5.com"),
+            Book("6", "", "book5", "www.b6.com"),
         )
-        ResultScreen(fakeData)
+        ResultScreen(fakeData, {})
     }
 }
